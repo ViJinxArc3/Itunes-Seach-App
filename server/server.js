@@ -2,9 +2,21 @@ const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const path = require('path'); // Add this line to require path module
 
 const app = express();
 const port = 5000;
+
+
+  app.use(express.static(path.join(__dirname,'client/build')));
+
+  if (process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    app.get('*',(req,res)=> {res.sendFile(path.resolve(__dirname,
+    'client', 'build','index.html'));
+    });
+    }
+  
 
 app.use(bodyParser.json());
 // use helmet to secure express
