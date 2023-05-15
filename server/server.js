@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const path = require('path'); // Add this line to require path module
 
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 5000;
 
 
   app.use(express.static(path.join(__dirname,'client/build')));
@@ -61,6 +61,6 @@ app.delete('/search/favorites/:id', (req, res) => {
 });
 
 // start the server
-app.listen(port, () => {
-  console.log(`Server listening to port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening to port ${PORT}`);
 });
